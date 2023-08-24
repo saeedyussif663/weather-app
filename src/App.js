@@ -18,7 +18,7 @@ function App() {
     const wrapper = document.getElementById('wrapper');
     if (state.isDarkMode) {
       wrapper.classList.add('dark')
-    } else {
+    } else {  
       wrapper.classList.remove('dark')
     }
   }, [state.isDarkMode])
