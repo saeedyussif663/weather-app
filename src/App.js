@@ -7,25 +7,42 @@ import AirConditions from "./Components/AirConditions"
 
 import { useGlobalContext } from "./Context";
 import { useEffect } from "react";
+import Loader from "./Loader";
 
 function App() {
   const { state } = useGlobalContext();
+  const {weatherDetails} = state
+  let height;
+
+  if (state.isLoading) {
+    height = 'h-screen';
+  } else {
+    height = 'h-full'
+  }
 
   useEffect(() => {
-     const wrapper = document.getElementById('wrapper');
-        if (state.isDarkMode) {
-            wrapper.classList.add('dark')
-        } else {
-            wrapper.classList.remove('dark')
-        }
-  },[state.isDarkMode])
+    const wrapper = document.getElementById('wrapper');
+    if (state.isDarkMode) {
+      wrapper.classList.add('dark')
+    } else {
+      wrapper.classList.remove('dark')
+    }
+  }, [state.isDarkMode])
 
   return (
-    <div className="flex flex-col  bg-white dark:bg-slate-950 h-screen">
+    <div className={`flex flex-col  bg-white dark:bg-slate-950 `}>
+      {state.isLoading ?
+        <>
+          <SearchBar />
+          <Loader /> 
+        </> :
+        <>
       <SearchBar />
       <City />
       <TodayForecast />
-      <AirConditions/>
+     { weatherDetails.temperature &&<AirConditions />}
+      </>
+      }
       </div>
   );
 }
