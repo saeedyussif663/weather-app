@@ -31,7 +31,7 @@ const AppProvider = ({ children }) => {
 
     const makeApiCall = async (city) => {
         dispatch({ type: "TOGGLE_LOADER", })
-        const Api =` http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=483fbf546ed6d65441cd3390fb2fe355`
+        const Api =` https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=483fbf546ed6d65441cd3390fb2fe355`
         try {
             const response = await fetch(Api);
             const data = await response.json();
