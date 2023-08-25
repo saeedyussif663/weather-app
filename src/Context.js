@@ -35,7 +35,12 @@ const AppProvider = ({ children }) => {
         try {
             const response = await fetch(Api);
             const data = await response.json();
-            console.log(data);
+             if (!response.ok) {
+                 dispatch({ type: "ERROR", data });
+                 dispatch({ type: "TOGGLE_LOADER", })
+                 return
+            }
+            dispatch({type: 'RESETERROR'})
             const weather = {
                 city: data.name,
                 windSpeed: data.wind.speed,
@@ -43,7 +48,7 @@ const AppProvider = ({ children }) => {
                 humidity: data.main.humidity,
                 temperature: data.main.temp,
                 description: data.weather[0].description
-            }
+            };
             dispatch({type: 'SETWEATHERDATA', details: weather})
         } catch (error) {
             

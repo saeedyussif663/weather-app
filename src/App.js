@@ -2,16 +2,16 @@
 
 import SearchBar from "./Components/SearchBar";
 import City from "./Components/City";
-import TodayForecast from "./Components/TodayForecast";
 import AirConditions from "./Components/AirConditions"
 
 import { useGlobalContext } from "./Context";
 import { useEffect } from "react";
 import Loader from "./Loader";
+import ErrorModal from "./Components/ErrorModal";
 
 function App() {
   const { state } = useGlobalContext();
-  const {weatherDetails} = state
+  const {weatherDetails, error} = state
 
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function App() {
   }, [state.isDarkMode])
 
   return (
-    <div className={`flex flex-col  bg-white dark:bg-slate-950 `}>
+    <div className={`flex flex-col  bg-white dark:bg-slate-950 h-screen`}>
       {state.isLoading ?
         <>
           <SearchBar />
@@ -32,8 +32,8 @@ function App() {
         </> :
         <>
       <SearchBar />
-      <City />
-      <TodayForecast />
+     <City />
+     {error.isError && <ErrorModal/>}
      { weatherDetails.temperature &&<AirConditions />}
       </>
       }
