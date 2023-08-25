@@ -31,7 +31,7 @@ function App() {
           <Loader /> 
         </> :
         <>
-      <SearchBar />
+     { !error.isError && <SearchBar />}
      <City />
      {error.isError && <ErrorModal/>}
      { weatherDetails.temperature && !error.isError ? <AirConditions /> : ''}
