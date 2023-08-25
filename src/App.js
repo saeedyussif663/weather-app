@@ -34,7 +34,7 @@ function App() {
       <SearchBar />
      <City />
      {error.isError && <ErrorModal/>}
-     { error.isError &&<AirConditions />}
+     { !error.isError &&<AirConditions />}
       </>
       }
       </div>
